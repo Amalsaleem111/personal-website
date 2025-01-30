@@ -752,3 +752,80 @@ img {
       left: -30px;
   }
 }
+/* Styling for the Certifications section */
+.certifications__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.certifications__content {
+  background-color: #f4f4f4;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.certifications__title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.certifications__date {
+  color: #888;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.certifications__description {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Dropdown Button */
+.dropdown-btn {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.dropdown-btn i {
+  margin-left: 8px;
+}
+
+.dropdown-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Hidden Certification Image */
+.certifications__image-container {
+  display: none;
+  margin-top: 1rem;
+}
+
+.certifications__image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Show image when dropdown is active */
+.certifications__image-container.active {
+  display: block;
+}
