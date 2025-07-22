@@ -313,7 +313,8 @@
                     <form id="submit-form" action=""  class="contact__form">
                         <input type="text" name="name" placeholder="Name" class="contact__input">
                         <input type="mail" name="email" placeholder="Email" class="contact__input">
-                        <textarea placeholder="Tell Us..." name="topic" id="" cols="0" rows="10" class="contact__input"></textarea>
+                        <div id="editor" style="height: 150px;"></div>
+<input type="hidden" name="topic" id="topic">
                         <input type="submit" value="sent" class="contact__button button">
 
                     </form>
@@ -336,29 +337,128 @@
         <script src="https://smtpjs.com/v3/smtp.js">
         </script>
         <script>
-            $("#submit-form").submit((e)=>{
-                e.preventDefault()
-                $.ajax({
-                    url:"https://script.google.com/macros/s/AKfycbwzHEnJiKf5I8wgunFwom8hS8EoG756OTyI9nwRVccsYZFFKUUNI0uyHWjxh1-2OgoN/exec",
-                    data:$("#submit-form").serialize(),
-                    method:"post",
-                    success:function (response){
-                        swal({
-                                 title: "Thank You!",
-                                 text: "For connecting!",
-                                 icon: "success",
-                                 button: "ok",
-                            });
-                            $("#submit-form")[0].reset();
-                       // window.location.reload()
-                        //window.location.href="https://google.com"
-                    },
-                    error:function (err){
-                        alert("Something Error")
-        
-                    }
-                })
-            })
-        </script>
+    $("#submit-form").submit(function(e){
+        e.preventDefault();
+
+        // Get form values
+        var name = $("input[name='name']").val().trim();
+        var email = $("input[name='email']").val().trim();
+        var topic = $("textarea[name='topic']").val().trim();
+
+        // Simple email regex
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Validation
+        if(name === "" || email === "" || topic === "") {
+            swal({
+                title: "Error",
+                text: "Please fill in all fields.",
+                icon: "error",
+                button: "ok",
+            });
+            return false;
+        }
+        if(!emailPattern.test(email)) {
+            swal({
+                title: "Error",
+                text: "Please enter a valid email address.",
+                icon: "error",
+                button: "ok",
+            });
+            return false;
+        }
+
+        // Show the popup immediately
+        swal({
+            title: "Thank You!",
+            text: "For connecting!",
+            icon: "success",
+            button: "ok",
+        });
+
+        // Optionally reset the form immediately
+        $("#submit-form")[0].reset();
+
+        // Send the form data in the background
+        $.ajax({
+            url:"https://script.google.com/macros/s/AKfycbwzHEnJiKf5I8wgunFwom8hS8EoG756OTyI9nwRVccsYZFFKUUNI0uyHWjxh1-2OgoN/exec",
+            data:$("#submit-form").serialize(),
+            method:"post",
+            success:function (response){
+                // You can handle further actions here if needed
+            },
+            error:function (err){
+                alert("Something Error");
+            }
+        });
+    });
+</script>
+<script>
+$(document).ready(function() {
+    // Add feedback spans after inputs if not present
+    if ($(".name-feedback").length === 0) {
+        $("input[name='name']").after('<span class="name-feedback" style="color:#ff4d4f;font-size:0.95em;display:block;margin-top:0.2em;"></span>');
+    }
+    if ($(".email-feedback").length === 0) {
+        $("input[name='email']").after('<span class="email-feedback" style="color:#ff4d4f;font-size:0.95em;display:block;margin-top:0.2em;"></span>');
+    }
+
+    function validateName(name) {
+        // Only letters and spaces, at least 3 characters
+        return /^[A-Za-z ]{3,}$/.test(name);
+    }
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function checkFormValidity() {
+        var name = $("input[name='name']").val().trim();
+        var email = $("input[name='email']").val().trim();
+        var validName = validateName(name);
+        var validEmail = validateEmail(email);
+        $(".contact__button").prop("disabled", !(validName && validEmail));
+    }
+
+    $("input[name='name']").on("input", function() {
+        var name = $(this).val();
+        if (name.length > 0 && name.length < 3) {
+            $(".name-feedback").text("Name must be at least 3 letters.");
+        } else if (name.length >= 3 && !/^[A-Za-z ]+$/.test(name)) {
+            $(".name-feedback").text("Only letters and spaces allowed.");
+        } else {
+            $(".name-feedback").text("");
+        }
+        checkFormValidity();
+    });
+
+    $("input[name='email']").on("input", function() {
+        var email = $(this).val();
+        if (email.length > 0 && !validateEmail(email)) {
+            $(".email-feedback").text("Please enter a valid email address.");
+        } else {
+            $(".email-feedback").text("");
+        }
+        checkFormValidity();
+    });
+
+    // Initial check
+    checkFormValidity();
+});
+</script>
+<!-- Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow',
+    placeholder: 'Tell Us...'
+  });
+
+  // On form submit, copy Quill HTML to hidden input
+  $("#submit-form").submit(function() {
+    $("#topic").val(quill.root.innerHTML);
+  });
+</script>
     </body>
 </html>
