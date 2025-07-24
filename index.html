@@ -52,9 +52,40 @@
                 <div class="home__data">
                     <h1 class="home__title">Hi,<br>I'm <span class="home__title-color">Amal Saleem</span><br> Software Engineer</h1>
                     
-                    <a href="#" class="button">
-                        <i  class='bx bx-file' style='color:#f2f2f2'  >&nbsp;</i>
+                    <a href="assets/img/Resume.pdf" class="button" download>
+                        <i class='bx bx-file' style='color:#f2f2f2'  >&nbsp;</i>
                             <span>Resume</span></a>
+                        <script>
+                        $(document).ready(function() {
+                            var resumeUrl = "assets/img/Resume.pdf";
+                            var resumePassword = "A!1s@2d#3f$4g%5"; // Change this to your desired password
+                            $(".button").click(function(e) {
+                                if ($(this).find("span").text().trim() === "Resume") {
+                                    e.preventDefault();
+                                    swal({
+                                        text: "Enter password to download resume:",
+                                        content: "input",
+                                        button: {
+                                            text: "Submit",
+                                            closeModal: false
+                                        }
+                                    }).then(function(value) {
+                                        if (value === resumePassword) {
+                                            swal.close();
+                                            window.location.href = resumeUrl;
+                                        } else {
+                                            swal({
+                                                title: "Access Denied",
+                                                text: "Incorrect password.",
+                                                icon: "error",
+                                                button: "ok"
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                        </script>
                 </div>
 
                 <div class="home__social">
