@@ -167,58 +167,6 @@
             </section>
                             <!--===== Projects =====-->
 
-
-
-
-<!--===== TIMELINE =====-->
-<!--===== TIMELINE =====-->
-<!-- <section class="timeline section" id="timeline">
-    <h2 class="section-title">My Timeline</h2>
-
-    <div class="timeline__container bd-grid">
-        <div class="timeline__content">
-            <div class="timeline__time">
-                <span class="timeline__rounder"></span>
-                <span class="timeline__line"></span>
-            </div>
-
-            <div class="timeline__data bd-grid">
-                <h3 class="timeline__title">Started my First Job</h3>
-                <span class="timeline__date">June 2021</span>
-                <p class="timeline__description">Began my journey as a Software Engineer at XYZ company, focusing on QA automation and contributing to multiple projects.</p>
-            </div>
-        </div>
-
-        <div class="timeline__content">
-            <div class="timeline__time">
-                <span class="timeline__rounder"></span>
-                <span class="timeline__line"></span>
-            </div>
-
-            <div class="timeline__data bd-grid">
-                <h3 class="timeline__title">Awarded Star of the Month</h3>
-                <span class="timeline__date">December 2022</span>
-                <p class="timeline__description">Received the 'Star of the Month' award for outstanding performance in automation testing and cross-team collaboration.</p>
-            </div>
-        </div>
-
-        <div class="timeline__content">
-            <div class="timeline__time">
-                <span class="timeline__rounder"></span>
-                <span class="timeline__line"></span>
-            </div>
-
-            <div class="timeline__data bd-grid">
-                <h3 class="timeline__title">Promoted to Senior Engineer</h3>
-                <span class="timeline__date">March 2024</span>
-                <p class="timeline__description">Promoted to Senior Software Engineer, leading QA automation projects and mentoring junior team members.</p>
-            </div>
-        </div>
-    </div>
-</section> -->
-
-<!-- #Education  -->
-
 <!--===== EDUCATION =====-->
 <section class="education section" id="Education">
     <h2 class="section-title">Education</h2>
@@ -311,6 +259,33 @@
             <div class="certifications__image-container">
                 <img src="assets/img/linkedinnnn.png" alt="Generative AI Certification" class="certifications__image">
             </div>
+        </div>
+        <div class="certifications__content">
+            <h3 class="certifications__title">Getting Started with Software Testing</h3>
+            <span class="certifications__date">July 2023</span>
+            <p class="certifications__description">Learn the foundations, tools, and techniques for a career in software testing.</p>
+            <!-- Dropdown button -->
+            <button class="dropdown-btn">
+                <span>View Certification Image</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <!-- Hidden Certification Image (default hidden) -->
+            <div class="certifications__image-container">
+                <img src="assets/img/software_testing.png" alt="Software Testing Certification" class="certifications__image">
+            </div>
+            
+            <style>
+            @media (min-width: 768px) {
+                .certifications__container.bd-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .certifications__content:nth-child(3) {
+                    grid-column: 1 / span 2;
+                    justify-self: center;
+                }
+            }
+            </style>
         </div>
     </div>
 </section>
