@@ -62,14 +62,57 @@
                             $(".button").click(function(e) {
                                 if ($(this).find("span").text().trim() === "Resume") {
                                     e.preventDefault();
+                                    var inputWrapper = document.createElement('div');
+                                    inputWrapper.style.position = 'relative';
+                                    inputWrapper.style.display = 'flex';
+                                    inputWrapper.style.alignItems = 'center';
+                                    inputWrapper.style.width = '100%';
+                                    var input = document.createElement('input');
+                                    input.type = 'password';
+                                    input.placeholder = 'Enter password';
+                                    input.style.width = '100%';
+                                    input.style.padding = '10px 40px 10px 14px';
+                                    input.style.fontSize = '1.15em';
+                                    input.style.border = '1.5px solid #bdbdbd';
+                                    input.style.borderRadius = '6px';
+                                    input.style.background = '#f7f7f7';
+                                    input.style.outline = 'none';
+                                    input.style.transition = 'border-color 0.2s';
+                                    input.onfocus = function() {
+                                        input.style.borderColor = '#0078d7';
+                                    };
+                                    input.onblur = function() {
+                                        input.style.borderColor = '#bdbdbd';
+                                    };
+                                    var eye = document.createElement('i');
+                                    eye.className = 'bx bx-show';
+                                    eye.style.position = 'absolute';
+                                    eye.style.right = '14px';
+                                    eye.style.cursor = 'pointer';
+                                    eye.style.fontSize = '1.4em';
+                                    eye.style.color = '#888';
+                                    eye.title = 'Show/Hide Password';
+                                    eye.style.zIndex = '2';
+                                    eye.onclick = function() {
+                                        if (input.type === 'password') {
+                                            input.type = 'text';
+                                            eye.className = 'bx bx-hide';
+                                        } else {
+                                            input.type = 'password';
+                                            eye.className = 'bx bx-show';
+                                        }
+                                    };
+                                    inputWrapper.appendChild(input);
+                                    inputWrapper.appendChild(eye);
                                     swal({
                                         text: "Enter password to download resume:",
-                                        content: "input",
+                                        content: inputWrapper,
                                         button: {
                                             text: "Submit",
                                             closeModal: false
                                         }
-                                    }).then(function(value) {
+                                    }).then(function() {
+                                        var value = input.value;
                                         if (value === resumePassword) {
                                             swal.close();
                                             window.location.href = resumeUrl;
