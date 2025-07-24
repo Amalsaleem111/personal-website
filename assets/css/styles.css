@@ -602,8 +602,6 @@ img {
   }
 }
 
-
-
 /* ===== EDUCATION ===== */
 .education {
   padding: 4rem 0;
@@ -781,10 +779,9 @@ img {
 }
 /* Styling for the Certifications section */
 .certifications__container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
 
 .certifications__content {
@@ -855,4 +852,16 @@ img {
 /* Show image when dropdown is active */
 .certifications__image-container.active {
   display: block;
+}
+   
+.certifications__image-container {
+    display: none;
+    text-align: center;
+    margin-top: 1em;
+}
+.certifications__image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
